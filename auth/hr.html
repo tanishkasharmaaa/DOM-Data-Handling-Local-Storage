@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<style>
+    body{
+        align-items: center;
+        text-align: center;
+    }
+    table {
+        text-align: center;
+        width: 100%;
+        border-collapse: collapse;
+        border: 2px solid #ddd; 
+    }
+    th, td {
+        text-align: center;
+        border: 1px solid #ddd;
+        padding: 8px;
+        text-align: left;
+    }
+    th {
+        text-align: center;
+        background-color: #f2f2f2; 
+    }
+    tr:nth-child(even) {
+        text-align: center;
+        background-color: #f2f2f2; 
+    }
+    tr:hover {
+        background-color: #ddd;
+    }
+    td{
+        text-align: center;
+    }
+</style>
+<body>
+    <h1>Employees record (HR)</h1>
+    <div id="container">
+        <form action="">
+            <input type="text" placeholder="Enter employee's name">
+            <input type="text" placeholder="Enter employees's position">
+            <input type="text" placeholder="Enter employees's department">
+            <input type="submit" value="Submit">
+        </form>
+<table>
+    <thead>
+        <tr>
+            <th>ID</th>
+            <th>Name</th>
+            <th>Position</th>
+            <th>Department</th>
+            <th>Delete</th>
+        </tr>
+    </thead>
+    <tbody>
+       
+    </tbody>
+</table>
+    </div>
+</body>
+<script src="../script/hr.js"></script>
+</html>
