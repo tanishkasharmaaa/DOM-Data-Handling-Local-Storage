@@ -1,40 +1,25 @@
-let employeesData = [
-    {
-      name: "Manjeet",
-      role: "Marketing Head",
-      Department: "Marketing",
-    },
-    {
-      name: "Manisha",
-      role: "Content Head",
-      Department: "Marketing",
-    },
-    {
-      name: "Revtesh",
-      role: "Associate Instructor",
-      Department: "Teaching",
-    },
-    {
-      name: "Gundeep",
-      role: "Instructor",
-      Department: "Teaching",
-    },
-    {
-      name: "Jaspleen",
-      role: "Curriculum head",
-      Department: "Curriculum",
-    },
-  ];
-  
-  
-  
-  
-  let container = document.getElementById("container");
+let employeesData = [];
+let container = document.getElementById("container");
   let form=document.querySelector('form')
   let tbody=document.querySelector('tbody');
+let select=document.querySelector('#filter');
+let data=JSON.parse(localStorage.getItem('details'))
 
-  console.log(employeesData)
+select.addEventListener('change',function(){
+  filter()
+})
   
+function filter(){
+  let val=select.value;
+  if(val===''){
+ShowData()
+  }
+  else{
+    let filtering=data.filter(ele=>ele.department===val);
+   displayFilteredData(filtering)
+  }
+}
+
 function saveData(data){
     localStorage.setItem('details',JSON.stringify(data))
 }
@@ -47,15 +32,66 @@ function loadData(){
 }
 
 
+function displayFilteredData(filtering){
+  tbody.innerHTML=''
+   filtering.forEach((ele, i) => {
+  let tr = document.createElement("tr");
+  let name = document.createElement("td");
+  let employeeId = document.createElement("td");
+  let department = document.createElement("td");
+  let experience = document.createElement("td");
+  let email = document.createElement("td");
+  let mobile = document.createElement('td');
+  let role= document.createElement('td');
+  let deleteBtn=document.createElement('td');
+  let btn = document.createElement("button");
+
+  btn.innerText='Delete'
+  btn.addEventListener('click',function(){
+    handleDelete(i)
+  
+  })
+
+
+
+  name.innerText=ele.name;
+  employeeId.innerText=ele.employeeId;
+  department.innerText=ele.department;
+  experience.innerText=ele.experience;
+  email.innerText=ele.email;
+  mobile.innerText=ele.mobile;
+
+  let exp=parseInt(ele.experience)
+  if(exp>5){
+    role.innerText='Senior'
+  }
+  else if(exp>=2&&exp<=5){
+role.innerText='Junior'
+  }
+else {
+role.innerText='Fresher'
+}
+
+  deleteBtn.append(btn)
+  tr.append(name,employeeId,department,experience,email,mobile,role,deleteBtn);
+tbody.append(tr)
+});
+}
+
+
+
  function ShowData(){
     tbody.innerHTML=''
      employeesData.forEach((ele, i) => {
     let tr = document.createElement("tr");
-    let td1 = document.createElement("td");
-    let td2 = document.createElement("td");
-    let td3 = document.createElement("td");
-    let td4 = document.createElement("td");
-    let td5 = document.createElement("td");
+    let name = document.createElement("td");
+    let employeeId = document.createElement("td");
+    let department = document.createElement("td");
+    let experience = document.createElement("td");
+    let email = document.createElement("td");
+    let mobile = document.createElement('td');
+    let role= document.createElement('td');
+    let deleteBtn=document.createElement('td');
     let btn = document.createElement("button");
  
     btn.innerText='Delete'
@@ -66,13 +102,26 @@ function loadData(){
   
   
   
-    td1.innerText = i + 1;
-    td2.innerText = ele.name;
-    td3.innerText = ele.role;
-    td4.innerText = ele.Department;
+    name.innerText=ele.name;
+    employeeId.innerText=ele.employeeId;
+    department.innerText=ele.department;
+    experience.innerText=ele.experience;
+    email.innerText=ele.email;
+    mobile.innerText=ele.mobile;
+
+    let exp=parseInt(ele.experience)
+    if(exp>5){
+      role.innerText='Senior'
+    }
+    else if(exp>=2&&exp<=5){
+role.innerText='Junior'
+    }
+else {
+role.innerText='Fresher'
+}
   
-    td5.append(btn)
-    tr.append(td1, td2, td3, td4,td5);
+    deleteBtn.append(btn)
+    tr.append(name,employeeId,department,experience,email,mobile,role,deleteBtn);
   tbody.append(tr)
   });
   }
@@ -87,14 +136,21 @@ ShowData()
  function handleFormSubmit(e){
 e.preventDefault();
 let input=e.target;
-let name=input[0].value;
-let role=input[1].value;
-let Department=input[2].value;
+let name = input[0].value;
+    let employeeId = input[1].value;
+    let department = input[2].value;
+    let experience = input[3].value;
+    let email = input[4].value;
+    let mobile = input[5].value;
+    
 
 let obj={
     name:name,
-    role:role,
-    Department:Department
+    employeeId:employeeId,
+    department:department,
+    experience:experience,
+    email:email,
+    mobile:mobile
 }
 employeesData.push(obj)
 console.log(employeesData)
